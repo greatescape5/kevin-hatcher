@@ -100,9 +100,8 @@ a { color: var(--teal); text-decoration: none; }
   border-bottom: 1px solid var(--line);
   padding: 88px 0;
 }
-/* Home hero: ~3/4 of the screen tall, content vertically centered.
-   (Future: add a photo background here, e.g.
-    background: linear-gradient(rgba(15,58,86,.45), rgba(15,58,86,.45)), url('/hero.jpg') center/cover;) */
+/* Home hero: ~3/4 of the screen tall, content vertically centered, over a
+   darkened jobsite photo so the white headline stays legible. */
 .hero.home-hero {
   min-height: 75vh;
   display: flex;
@@ -110,8 +109,18 @@ a { color: var(--teal); text-decoration: none; }
   justify-content: center;
   padding-top: 56px;
   padding-bottom: 72px;
+  background:
+    linear-gradient(rgba(28, 28, 28, 0.5), rgba(28, 28, 28, 0.6)),
+    url('/hero.jpg') center / cover no-repeat;
+  border-bottom: none;
 }
 .hero .tag { color: var(--body); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.8rem; }
+/* Light text + buttons for the photo hero */
+.home-hero h1 { color: #fff; }
+.home-hero .lead { color: #f1eee8; }
+.home-hero .tag { color: var(--gold); }
+.home-hero .btn-outline { border-color: #fff; color: #fff; }
+.home-hero .btn-outline:hover { background: #fff; color: var(--navy); }
 
 /* Accent bar echoing the logo stripes */
 .stripe { height: 6px; display: flex; }
