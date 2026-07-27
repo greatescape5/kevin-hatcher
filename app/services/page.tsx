@@ -61,26 +61,29 @@ export default async function ServicesPage() {
       {/* EVERYTHING WE DO + NOT SURE WHAT YOU NEED */}
       <section className="section">
         <div className="container">
-          <div className="grid grid-2 services-split">
-            <div>
-              <span className="eyebrow">Full List</span>
-              <h2>Everything We Do</h2>
-              <div className="card list-card">
-                {SERVICE_NAMES.map((name) => (
-                  <div key={name} className="service-row">
-                    <span className="service-row-ic"><ServiceIcon name={name} size={24} /></span>
-                    <span>{name}</span>
-                  </div>
-                ))}
+          <div style={{ marginBottom: 28 }}>
+            <span className="eyebrow">Full List</span>
+            <h2>Everything We Do</h2>
+          </div>
+          <div className="card list-card service-cols">
+            {SERVICE_NAMES.map((name) => (
+              <div key={name} className="service-row">
+                <span className="service-row-ic"><ServiceIcon name={name} size={24} /></span>
+                <span>{name}</span>
               </div>
-            </div>
-            <div className="need-help">
+            ))}
+          </div>
+
+          <div className="need-help need-help--wide">
+            <div className="need-help-copy">
               <h2>Don&rsquo;t See What You Need?</h2>
               <p>
                 Just ask! Whether you need a new driveway, a cleared building site, or a complete
                 septic system installation, our experienced team delivers reliable results with
                 professional equipment and local expertise.
               </p>
+            </div>
+            <div className="btn-row">
               <Link href="/contact#get-in-touch" className="btn btn-primary">Get a Quote</Link>
               <a href={PHONE_HREF} className="btn btn-ghost">Call {PHONE}</a>
             </div>

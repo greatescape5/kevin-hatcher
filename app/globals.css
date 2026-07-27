@@ -168,6 +168,26 @@ a { color: var(--teal); text-decoration: none; }
 }
 .service-row:last-child { border-bottom: none; }
 .service-row-ic { color: var(--teal); display: inline-flex; flex: none; }
+
+/* Full-width service list flowed into two even columns */
+.service-cols { display: grid; grid-template-columns: 1fr; column-gap: 44px; }
+@media (min-width: 641px) {
+  .service-cols { grid-template-columns: 1fr 1fr; }
+  /* second column's bottom item — drop its divider so the row bottoms match */
+  .service-cols .service-row:nth-last-child(2) { border-bottom: none; }
+}
+
+/* "Not sure what you need" as a wide band under the list */
+.need-help--wide {
+  margin-top: 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 28px; flex-wrap: wrap;
+}
+.need-help--wide .need-help-copy { flex: 1 1 460px; }
+.need-help--wide h2 { margin-bottom: 10px; }
+.need-help--wide p { margin: 0; }
+.need-help--wide .btn-row { flex: 0 0 auto; }
+.need-help--wide .btn { display: inline-block; width: auto; margin-top: 0; }
 .need-help { background: var(--navy); color: #fff; border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow); }
 .need-help h2 { color: #fff; margin-bottom: 12px; }
 .need-help p { color: #d8d6d0; }
