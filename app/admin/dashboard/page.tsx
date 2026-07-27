@@ -46,6 +46,8 @@ export default function DashboardPage() {
   const [editId, setEditId] = useState<string | null>(null);
   const [eName, setEName] = useState('');
   const [eDesc, setEDesc] = useState('');
+  const [photoMsg, setPhotoMsg] = useState('');
+  const [uploadingPhotos, setUploadingPhotos] = useState(false);
 
   // ---- New project form ----
   const [name, setName] = useState('');
@@ -126,6 +128,57 @@ export default function DashboardPage() {
     )) return;
     const { error } = await supabase.from('exc_folders').delete().eq('id', f.id);
     if (!error) await loadData();
+  }
+
+  // ---------- FOLDER PHOTOS (multi-upload + reorder within one folder) ----------
+  const folderPhotos = (f: Folder) =>
+    projects
+      .filter((p) => p.folder_id === f.id)
+      .sort((a, b) => a.sort_order - b.sort_order || a.created_at.localeCompare(b.created_at));
+
+  async function handleUploadFolderPhotos(f: Folder, files: File[]) {
+    if (!files.length) return;
+    setUploadingPhotos(true);
+    setPhotoMsg('');
+    try {
+      let nextSort = projects.length ? Math.max(...projects.map((p) => p.sort_order)) + 1 : 1;
+      for (const file of files) {
+        const url = await uploadImage(file);
+        const baseName = file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim();
+        const { error } = await supabase.from('exc_projects').insert([{
+          name: baseName || f.name,
+          folder_id: f.id,
+          category: f.name,
+          description: null,
+          after_image_url: url,
+          sort_order: nextSort++,
+          published: true,
+        }]);
+        if (error) throw error;
+      }
+      setPhotoMsg(`Added ${files.length} photo${files.length > 1 ? 's' : ''}.`);
+      await loadData();
+    } catch (err: any) {
+      setPhotoMsg('Error: ' + (err?.message || 'upload failed'));
+    } finally {
+      setUploadingPhotos(false);
+    }
+  }
+
+  // Swap a photo with its neighbour to nudge the display order.
+  async function movePhoto(f: Folder, photo: Project, dir: -1 | 1) {
+    const list = folderPhotos(f);
+    const idx = list.findIndex((p) => p.id === photo.id);
+    const j = idx + dir;
+    if (j < 0 || j >= list.length) return;
+    const a = list[idx];
+    const b = list[j];
+    let aOrder = a.sort_order;
+    let bOrder = b.sort_order;
+    if (aOrder === bOrder) { aOrder = idx; bOrder = j; } // disambiguate ties
+    await supabase.from('exc_projects').update({ sort_order: bOrder }).eq('id', a.id);
+    await supabase.from('exc_projects').update({ sort_order: aOrder }).eq('id', b.id);
+    await loadData();
   }
 
   // ---------- BEFORE / AFTER ----------
@@ -237,12 +290,55 @@ export default function DashboardPage() {
           {folders.map((f) => (
             <div key={f.id} style={{ borderTop: '1px solid var(--line)', padding: '14px 0' }}>
               {editId === f.id ? (
-                <div style={{ display: 'grid', gap: 8 }}>
+                <div style={{ display: 'grid', gap: 12 }}>
                   <input value={eName} onChange={(e) => setEName(e.target.value)} placeholder="Folder name" />
                   <input value={eDesc} onChange={(e) => setEDesc(e.target.value)} placeholder="Short description" />
                   <div className="btn-row">
-                    <button className="btn btn-primary" style={{ padding: '8px 16px' }} onClick={() => saveEdit(f)}>Save</button>
-                    <button className="btn btn-ghost" style={{ padding: '8px 16px' }} onClick={() => setEditId(null)}>Cancel</button>
+                    <button className="btn btn-primary" style={{ padding: '8px 16px' }} onClick={() => saveEdit(f)}>Save details</button>
+                    <button className="btn btn-ghost" style={{ padding: '8px 16px' }} onClick={() => { setEditId(null); setPhotoMsg(''); }}>Close</button>
+                  </div>
+
+                  {/* Photos in this folder — upload several at once, then order with ← → */}
+                  <div style={{ borderTop: '1px solid var(--line)', paddingTop: 12 }}>
+                    <strong style={{ color: 'var(--navy)' }}>Photos in this folder ({folderPhotos(f).length})</strong>
+                    <p className="form-note" style={{ marginTop: 4 }}>
+                      Upload one or more photos, then use ← → to set the order they appear on the site.
+                    </p>
+                    {photoMsg && <div className={`alert ${photoMsg.startsWith('Error') ? 'err' : 'ok'}`}>{photoMsg}</div>}
+                    <div className="field">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        disabled={uploadingPhotos}
+                        onChange={(e) => {
+                          const files = Array.from(e.target.files ?? []);
+                          e.currentTarget.value = '';
+                          handleUploadFolderPhotos(f, files);
+                        }}
+                      />
+                    </div>
+                    {uploadingPhotos && <p className="form-note">Uploading…</p>}
+                    {folderPhotos(f).length > 0 && (
+                      <div className="admin-photo-grid">
+                        {folderPhotos(f).map((p, i, arr) => (
+                          <div key={p.id} className="admin-photo">
+                            {p.after_image_url
+                              ? <img src={p.after_image_url} alt={p.name} />
+                              : <div className="admin-photo-noimg">No image</div>}
+                            <div className="admin-photo-bar">
+                              <button type="button" disabled={i === 0} title="Move earlier"
+                                onClick={() => movePhoto(f, p, -1)}>←</button>
+                              <span className="admin-photo-pos">{i + 1}</span>
+                              <button type="button" disabled={i === arr.length - 1} title="Move later"
+                                onClick={() => movePhoto(f, p, 1)}>→</button>
+                              <button type="button" className="admin-photo-del" title="Delete photo"
+                                onClick={() => handleDeleteProject(p.id)}>✕</button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               ) : (
