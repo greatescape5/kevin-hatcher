@@ -86,9 +86,9 @@ a { color: var(--teal); text-decoration: none; }
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
-.nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 120px; }
 .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; color: var(--navy); font-size: 1.15rem; }
-.brand img { height: 55px; width: auto; }
+.brand img { height: 110px; width: auto; }
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links a { color: var(--navy); font-weight: 600; }
 .nav-links a:hover { color: var(--teal); }
@@ -254,7 +254,7 @@ a { color: var(--teal); text-decoration: none; }
 .ci-row a, .ci-row span { color: var(--body); font-size: 0.98rem; }
 
 /* Offset for sticky header when jumping to an anchor */
-.anchor-offset { scroll-margin-top: 88px; }
+.anchor-offset { scroll-margin-top: 135px; }
 
 /* Full-width closing CTA band (Services page) */
 .cta-final { background: var(--navy); }

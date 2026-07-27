@@ -12,11 +12,10 @@ export default function SiteHeader() {
           <Image
             src="/logo.png"
             alt="Kevin Hatcher Excavation"
-            width={55}
-            height={55}
+            width={110}
+            height={110}
             priority
           />
-          <span>Kevin Hatcher Excavation</span>
         </Link>
         <nav className="nav-links">
           <Link href="/">Home</Link>
