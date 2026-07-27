@@ -46,7 +46,7 @@ export default async function HomePage() {
       <section className="hero home-hero">
         <div className="container center">
           <span className="tag">North Idaho</span>
-          <h1>Site Prep. Septic. Excavation.<br />Done Right.</h1>
+          <h1>Site Prep, Specialty Projects, and Excavation Services for Residential and Commercial Clients</h1>
           <p className="lead">
             With over 40 years of excavation expertise, we bring precision and professionalism
             to every job in North Idaho — residential and commercial.
