@@ -57,11 +57,10 @@ export default function ContactPage() {
               </ul>
             </div>
             <div>
-              {/* Replace with a real photo: drop it at public/our-story.jpg */}
               <img
                 className="story-photo"
-                src="https://placehold.co/800x600/363636/f6991e?text=Kevin+Hatcher+Excavation"
-                alt="Kevin Hatcher Excavation at work"
+                src="/our-story.jpg"
+                alt="Tiered rock retaining walls on a hillside property built by Kevin Hatcher Excavation"
               />
             </div>
           </div>
