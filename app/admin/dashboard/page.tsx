@@ -181,6 +181,14 @@ export default function DashboardPage() {
     await loadData();
   }
 
+  // Rename a photo (the caption shown on its tile).
+  async function renamePhoto(photo: Project, name: string) {
+    const trimmed = name.trim();
+    if (!trimmed || trimmed === photo.name) return;
+    await supabase.from('exc_projects').update({ name: trimmed }).eq('id', photo.id);
+    await loadData();
+  }
+
   // ---------- BEFORE / AFTER ----------
   async function uploadImage(f: File): Promise<string> {
     const safeName = f.name.replace(/[^a-zA-Z0-9._-]/g, '-');
@@ -326,6 +334,18 @@ export default function DashboardPage() {
                             {p.after_image_url
                               ? <img src={p.after_image_url} alt={p.name} />
                               : <div className="admin-photo-noimg">No image</div>}
+                            <input
+                              className="admin-photo-name"
+                              defaultValue={p.name}
+                              aria-label="Photo name"
+                              placeholder="Photo name"
+                              onKeyDown={(e) => { if (e.key === 'Enter') (e.target as HTMLInputElement).blur(); }}
+                              onBlur={(e) => {
+                                const v = e.target.value.trim();
+                                if (!v) { e.target.value = p.name; return; }
+                                renamePhoto(p, v);
+                              }}
+                            />
                             <div className="admin-photo-bar">
                               <button type="button" disabled={i === 0} title="Move earlier"
                                 onClick={() => movePhoto(f, p, -1)}>←</button>
