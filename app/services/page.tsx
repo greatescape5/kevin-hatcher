@@ -98,7 +98,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      {/* EVERYTHING WE DO + NOT SURE WHAT YOU NEED */}
+      {/* EVERYTHING WE DO */}
       <section className="section">
         <div className="container">
           <div style={{ marginBottom: 28 }}>
@@ -113,33 +113,22 @@ export default async function ServicesPage() {
               </div>
             ))}
           </div>
-
-          <div className="need-help need-help--wide">
-            <div className="need-help-copy">
-              <h2>Don&rsquo;t See What You Need?</h2>
-              <p>
-                Just ask! Whether you need a new driveway, a cleared building site, or a complete
-                septic system installation, our experienced team delivers reliable results with
-                professional equipment and local expertise.
-              </p>
-            </div>
-            <div className="btn-row">
-              <Link href="/contact#get-in-touch" className="btn btn-primary">Get a Quote</Link>
-              <a href={PHONE_HREF} className="btn btn-ghost">Call {PHONE}</a>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* FINAL CTA — Don't see what you need */}
       <section className="section cta-final">
         <div className="container center">
           <span className="eyebrow">Let&rsquo;s Get Started</span>
-          <h2>Start Your Project With Confidence</h2>
-          <p>Contact Kevin Hatcher Excavation today for a free quote — no pressure, no obligations.</p>
+          <h2>Don&rsquo;t See What You Need?</h2>
+          <p>
+            Just ask! Whether you need a new driveway, a cleared building site, or a complete
+            septic system installation, our experienced team delivers reliable results with
+            professional equipment and local expertise.
+          </p>
           <div className="btn-row center">
             <Link href="/contact#get-in-touch" className="btn btn-primary">Get a Quote</Link>
-            <a href={PHONE_HREF} className="btn btn-ghost">Call Now</a>
+            <a href={PHONE_HREF} className="btn btn-ghost">Call {PHONE}</a>
           </div>
         </div>
       </section>
