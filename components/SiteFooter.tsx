@@ -1,4 +1,8 @@
 import Link from 'next/link';
+import { Cinzel } from 'next/font/google';
+
+// Design-credit font — self-hosted at build time by next/font (no runtime request).
+const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '600'], display: 'swap' });
 
 export default function SiteFooter() {
   const year = 2026; // update yearly if you like
@@ -40,6 +44,12 @@ export default function SiteFooter() {
             <Link href="/admin" className="admin-dot" aria-label="Admin">.</Link>
           </span>
           <span>Cocolalla, Idaho — Serving North Idaho</span>
+        </div>
+        <div className={`site-credit ${cinzel.className}`}>
+          Website designed by{' '}
+          <a href="https://greatescapewebservices.com" target="_blank" rel="noopener noreferrer">
+            Great Escape Web &amp; Business Services, LLC
+          </a>
         </div>
       </div>
     </footer>
