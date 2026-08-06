@@ -1,15 +1,21 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AREAS } from '@/lib/areas';
 
 export default function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+
   return (
     <header className="site-header">
       <div className="stripe" aria-hidden="true">
         <span /><span /><span /><span />
       </div>
       <div className="container nav">
-        <Link href="/" className="brand">
+        <Link href="/" className="brand" onClick={close}>
           <Image
             src="/logo.png"
             alt="Kevin Hatcher Excavation"
@@ -18,6 +24,8 @@ export default function SiteHeader() {
             priority
           />
         </Link>
+
+        {/* Desktop nav */}
         <nav className="nav-links">
           <Link href="/">Home</Link>
           <Link href="/services">Services</Link>
@@ -38,7 +46,42 @@ export default function SiteHeader() {
           <Link href="/contact">Contact</Link>
           <Link href="/contact#get-in-touch" className="btn btn-primary nav-cta">Get a Quote</Link>
         </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          className="nav-toggle"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            {open ? (
+              <path d="M6 6l12 12M18 6L6 18" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile menu panel */}
+      {open && (
+        <div className="mobile-menu">
+          <Link href="/" onClick={close}>Home</Link>
+          <Link href="/services" onClick={close}>Services</Link>
+          <Link href="/areas" onClick={close} className="mobile-menu-section">Areas We Serve</Link>
+          <div className="mobile-menu-areas">
+            {AREAS.map((a) => (
+              <Link key={a.slug} href={`/areas/${a.slug}`} onClick={close}>{a.name}</Link>
+            ))}
+          </div>
+          <Link href="/contact" onClick={close}>Contact</Link>
+          <Link href="/contact#get-in-touch" className="btn btn-primary mobile-menu-cta" onClick={close}>
+            Get a Quote
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

@@ -63,20 +63,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* INTRO — site-preparation keyword copy */}
-      <section className="section">
-        <div className="container center">
-          <span className="eyebrow">Sandpoint &amp; North Idaho</span>
-          <h2>Site Preparation &amp; Excavation, Done Right</h2>
-          <p className="lead" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            Kevin Hatcher Excavation has spent 40+ years preparing building sites across Bonner
-            County — from construction site prep, grading, and leveling to foundation excavation,
-            septic systems, and land clearing. Whether it&rsquo;s a residential lot in Sandpoint or a
-            commercial site in Ponderay, Sagle, or Bonners Ferry, we get your ground ready to build.
-          </p>
-        </div>
-      </section>
-
       {/* SERVICES */}
       <section className="section tint-blue">
         <div className="container">
@@ -118,6 +104,20 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* INTRO — site-preparation keyword copy */}
+      <section className="section">
+        <div className="container center">
+          <span className="eyebrow">Sandpoint &amp; North Idaho</span>
+          <h2>Site Preparation &amp; Excavation, Done Right</h2>
+          <p className="lead" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+            Kevin Hatcher Excavation has spent 40+ years preparing building sites across Bonner
+            County — from construction site prep, grading, and leveling to foundation excavation,
+            septic systems, and land clearing. Whether it&rsquo;s a residential lot in Sandpoint or a
+            commercial site in Ponderay, Sagle, or Bonners Ferry, we get your ground ready to build.
+          </p>
+        </div>
+      </section>
 
       {/* PORTFOLIO HIGHLIGHTS */}
       <section className="section tint-teal">
