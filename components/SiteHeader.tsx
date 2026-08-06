@@ -7,7 +7,11 @@ import { AREAS } from '@/lib/areas';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const close = () => setOpen(false);
+  const [areasOpen, setAreasOpen] = useState(false);
+  const close = () => {
+    setOpen(false);
+    setAreasOpen(false);
+  };
 
   return (
     <header className="site-header">
@@ -38,9 +42,12 @@ export default function SiteHeader() {
               </svg>
             </Link>
             <div className="nav-dropdown-menu">
-              {AREAS.map((a) => (
-                <Link key={a.slug} href={`/areas/${a.slug}`}>{a.name}</Link>
-              ))}
+              <span className="nav-dropdown-eyebrow">Towns We Serve</span>
+              <div className="nav-dropdown-grid">
+                {AREAS.map((a) => (
+                  <Link key={a.slug} href={`/areas/${a.slug}`}>{a.name}</Link>
+                ))}
+              </div>
             </div>
           </div>
           <Link href="/contact">Contact</Link>
@@ -56,11 +63,7 @@ export default function SiteHeader() {
         >
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            {open ? (
-              <path d="M6 6l12 12M18 6L6 18" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            )}
+            {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
           </svg>
         </button>
       </div>
@@ -70,12 +73,28 @@ export default function SiteHeader() {
         <div className="mobile-menu">
           <Link href="/" onClick={close}>Home</Link>
           <Link href="/services" onClick={close}>Services</Link>
-          <Link href="/areas" onClick={close} className="mobile-menu-section">Areas We Serve</Link>
-          <div className="mobile-menu-areas">
-            {AREAS.map((a) => (
-              <Link key={a.slug} href={`/areas/${a.slug}`} onClick={close}>{a.name}</Link>
-            ))}
-          </div>
+
+          {/* Areas We Serve — collapsible on mobile */}
+          <button
+            type="button"
+            className="mobile-menu-toggle"
+            aria-expanded={areasOpen}
+            onClick={() => setAreasOpen((o) => !o)}
+          >
+            Areas We Serve
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="2.5" aria-hidden="true" className={areasOpen ? 'rot' : ''}>
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          {areasOpen && (
+            <div className="mobile-menu-areas">
+              {AREAS.map((a) => (
+                <Link key={a.slug} href={`/areas/${a.slug}`} onClick={close}>{a.name}</Link>
+              ))}
+            </div>
+          )}
+
           <Link href="/contact" onClick={close}>Contact</Link>
           <Link href="/contact#get-in-touch" className="btn btn-primary mobile-menu-cta" onClick={close}>
             Get a Quote
