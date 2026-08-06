@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Cinzel } from 'next/font/google';
+import { AREAS } from '@/lib/areas';
 
 // Design-credit font — self-hosted at build time by next/font (no runtime request).
 const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '600'], display: 'swap' });
@@ -10,7 +11,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="container">
         <div className="cols">
-          <div style={{ maxWidth: 320 }}>
+          <div style={{ maxWidth: 300 }}>
             <h4>Kevin Hatcher Excavation</h4>
             <p style={{ margin: 0 }}>
               Site prep, septic systems, and excavation services for residential and
@@ -21,6 +22,7 @@ export default function SiteFooter() {
             <h4>Explore</h4>
             <p style={{ margin: '0 0 6px' }}><Link href="/">Home</Link></p>
             <p style={{ margin: '0 0 6px' }}><Link href="/services">Services</Link></p>
+            <p style={{ margin: '0 0 6px' }}><Link href="/areas">Areas We Serve</Link></p>
             <p style={{ margin: '0 0 6px' }}><Link href="/contact">Contact</Link></p>
             <p style={{ margin: 0 }}>
               <a href="https://www.facebook.com/septicsystemssiteprep/" target="_blank" rel="noopener noreferrer">
@@ -28,12 +30,15 @@ export default function SiteFooter() {
               </a>
             </p>
           </div>
-          <div>
-            <h4>Service Areas</h4>
-            <p style={{ margin: 0 }}>
-              Sandpoint · Sagle · Cocolalla<br />
-              Athol · Ponderay · Kootenai<br />
-              and surrounding communities
+          <div style={{ maxWidth: 260 }}>
+            <h4><Link href="/areas">Areas We Serve</Link></h4>
+            <p style={{ margin: 0, lineHeight: 2 }}>
+              {AREAS.map((a, i) => (
+                <span key={a.slug}>
+                  <Link href={`/areas/${a.slug}`}>{a.name}</Link>
+                  {i < AREAS.length - 1 ? ' · ' : ''}
+                </span>
+              ))}
             </p>
           </div>
         </div>
