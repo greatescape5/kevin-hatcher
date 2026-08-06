@@ -17,10 +17,13 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const folder = await getFolderBySlug(params.slug);
-  if (!folder) return { title: 'Service | Kevin Hatcher Excavation' };
+  if (!folder) return { title: 'Service' };
   return {
-    title: `${folder.name} | Kevin Hatcher Excavation`,
-    description: folder.description || `${folder.name} projects across North Idaho.`,
+    title: `${folder.name} in Sandpoint & North Idaho`,
+    description:
+      folder.description ||
+      `${folder.name} by Kevin Hatcher Excavation — serving Sandpoint, Bonner County, and North Idaho.`,
+    alternates: { canonical: `/services/${params.slug}` },
   };
 }
 

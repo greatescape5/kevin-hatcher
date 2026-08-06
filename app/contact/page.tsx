@@ -2,8 +2,10 @@ import ContactForm from './ContactForm';
 import HashScroll from '@/components/HashScroll';
 
 export const metadata = {
-  title: 'Contact | Kevin Hatcher Excavation',
-  description: 'Get a free excavation, site prep, or septic system quote in Sandpoint and North Idaho.',
+  title: 'Contact Us — Free Site Prep & Excavation Quote',
+  description:
+    'Request a free site preparation, grading, or excavation quote in Sandpoint and North Idaho. Call (208) 920-3352 or send Kevin Hatcher Excavation a message.',
+  alternates: { canonical: '/contact' },
 };
 
 const PHONE = '(208) 920-3352';

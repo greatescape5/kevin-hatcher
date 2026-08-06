@@ -3,8 +3,10 @@ import { getFolders, getProjects } from '@/lib/supabase';
 import ServiceIcon from '@/components/ServiceIcon';
 
 export const metadata = {
-  title: 'Our Services | Kevin Hatcher Excavation',
-  description: 'Excavation, site prep, septic systems, land clearing, grading, road building and more — serving Sandpoint and North Idaho.',
+  title: 'Excavation & Site Preparation Services in North Idaho',
+  description:
+    'Site preparation, construction site prep, grading, excavation, foundation prep, land clearing, and septic systems in Sandpoint, Bonners Ferry, and across North Idaho.',
+  alternates: { canonical: '/services' },
 };
 
 // Re-check the database periodically so new folders/photos appear without a redeploy.
@@ -13,23 +15,25 @@ export const revalidate = 60;
 const PHONE = '(208) 920-3352';
 const PHONE_HREF = 'tel:+12089203352';
 const SERVICE_NAMES = [
-  'Property Development',
-  'Land Development',
-  'Land Clearing',
+  'Site Preparation',
   'Construction Site Prep',
+  'Residential & Commercial Grading',
+  'Excavation',
+  'Foundation Preparation',
+  'Land Clearing',
   'Tree Removal / Logging',
   'Mulching',
-  'Grading',
-  'Road Building',
+  'Road Building & Driveways',
   'Rock Hauling',
   'Trucking / Material Delivery',
-  'Retaining & Decorative Walls',
-  'Erosion Control',
-  'Hardscaping',
-  'Landscaping',
   'Utility Installation',
   'Drainage Systems',
   'Septic Systems',
+  'Erosion Control',
+  'Retaining & Decorative Walls',
+  'Hardscaping',
+  'Landscaping',
+  'Property & Land Development',
   'Trail Building',
 ];
 
@@ -50,10 +54,11 @@ export default async function ServicesPage() {
       <section className="hero" style={{ padding: '64px 0' }}>
         <div className="container center">
           <span className="tag">What We Offer</span>
-          <h1>Our Core Services</h1>
+          <h1>Excavation &amp; Site Preparation Services</h1>
           <p className="lead">
-            A full range of excavation services for homeowners, contractors, and businesses
-            throughout North Idaho. Tap a service to see recent work.
+            A full range of site preparation, grading, and excavation services for homeowners,
+            contractors, and businesses throughout Sandpoint and North Idaho. Tap a service to see
+            recent work.
           </p>
         </div>
       </section>
