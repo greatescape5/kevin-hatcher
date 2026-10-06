@@ -10,6 +10,17 @@ const PHONE_TEL = '+12089203352';
 const BRAND = '#f6991e';
 const INK = '#363636';
 
+// Lead-form spam blocklist (case-insensitive). An entry beginning with "@"
+// blocks the whole domain, e.g. "@dandyaisoftware.com".
+const BLOCKED_EMAILS = [
+  'jennobrien@dandyaisoftware.com',
+];
+
+function isBlocked(email: string): boolean {
+  const e = email.trim().toLowerCase();
+  return BLOCKED_EMAILS.some((b) => (b.startsWith('@') ? e.endsWith(b) : e === b));
+}
+
 const esc = (s: string) =>
   (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -65,6 +76,11 @@ export async function POST(req: Request) {
 
   if (!name || !email) {
     return NextResponse.json({ error: 'Name and email are required.' }, { status: 400 });
+  }
+
+  // ---- Spam blocklist: silently drop (look like success so they don't adapt) ----
+  if (isBlocked(email)) {
+    return NextResponse.json({ ok: true, saved: false });
   }
 
   // ---- 1. Save the lead to Supabase ----
