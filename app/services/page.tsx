@@ -5,7 +5,7 @@ import ServiceIcon from '@/components/ServiceIcon';
 export const metadata = {
   title: 'Excavation & Site Preparation Services in North Idaho',
   description:
-    'Site preparation, construction site prep, grading, excavation, foundation prep, land clearing, and septic systems in Sandpoint, Bonners Ferry, and across North Idaho.',
+    'Site preparation, grading, excavation, demolition, foundation prep and wall repair, land clearing, and septic systems in Sandpoint, Bonners Ferry, and across North Idaho.',
   alternates: { canonical: '/services' },
 };
 
@@ -19,7 +19,9 @@ const SERVICE_NAMES = [
   'Construction Site Prep',
   'Residential & Commercial Grading',
   'Excavation',
+  'Demolition',
   'Foundation Preparation',
+  'Foundation Wall Repair',
   'Land Clearing',
   'Tree Removal / Logging',
   'Mulching',

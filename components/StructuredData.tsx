@@ -22,7 +22,10 @@ const SERVICES = [
   'Construction Site Preparation',
   'Grading & Leveling',
   'Excavation',
+  'Demolition',
   'Foundation Preparation',
+  'Foundation Wall Repair',
+  'Foundation Contractor Services',
   'Land Clearing',
   'Septic System Installation',
   'Road Building & Driveways',
@@ -44,7 +47,7 @@ export default function StructuredData() {
     email: 'Khatcher40@yahoo.com',
     priceRange: '$$',
     description:
-      'Site preparation, grading, excavation, septic systems, and land clearing for residential and commercial clients across Sandpoint and North Idaho. Over 40 years of experience.',
+      'Site preparation, grading, excavation, demolition, foundation work, septic systems, and land clearing for residential and commercial clients across Sandpoint and North Idaho. Over 40 years of experience.',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Cocolalla',

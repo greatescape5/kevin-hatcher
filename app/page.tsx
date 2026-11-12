@@ -15,12 +15,12 @@ export const metadata = {
 };
 
 const SERVICES = [
-  { title: 'Site Preparation', text: 'Clearing, grading, and prepping residential and commercial building sites and foundations of any size.' },
-  { title: 'Grading & Excavation', text: 'Site grading, leveling, driveways, access roads, and foundation excavation done right.' },
+  { title: 'Site Preparation', text: 'Clearing, grading, and prepping residential and commercial building sites of any size.' },
+  { title: 'Grading & Excavation', text: 'Site grading, driveways, access roads, and foundation excavation done right.' },
+  { title: 'Foundation Work', text: 'Foundation excavation, foundation wall repair, and foundation contractor services for new builds and existing homes.' },
+  { title: 'Demolition', text: 'Safe demolition and removal of structures, concrete, and rock across North Idaho.' },
   { title: 'Septic Systems', text: 'Licensed installation and replacement of septic systems that meet Bonner County requirements.' },
   { title: 'Land Clearing', text: 'Tree removal, logging, and mulching to open up and prepare your property.' },
-  { title: 'Utilities & Drainage', text: 'Utility installation, drainage systems, and erosion control.' },
-  { title: 'Retaining Walls & Hardscaping', text: 'Retaining and decorative walls, hardscaping, and landscaping.' },
 ];
 
 const WHY = [
@@ -112,9 +112,10 @@ export default async function HomePage() {
           <h2>Site Preparation &amp; Excavation, Done Right</h2>
           <p className="lead" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
             Kevin Hatcher Excavation has spent 40+ years preparing building sites across Bonner
-            County — from construction site prep, grading, and leveling to foundation excavation,
-            septic systems, and land clearing. Whether it&rsquo;s a residential lot in Sandpoint or a
-            commercial site in Ponderay, Sagle, or Bonners Ferry, we get your ground ready to build.
+            County — from construction site prep, grading, and demolition to foundation excavation
+            and wall repair, septic systems, and land clearing. Whether it&rsquo;s a residential lot in
+            Sandpoint or a commercial site in Ponderay, Sagle, or Bonners Ferry, we get your ground
+            ready to build.
           </p>
         </div>
       </section>
